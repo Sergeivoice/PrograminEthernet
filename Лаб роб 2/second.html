@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Про мене</title>
+  </head>
+  <body>
+    <h1>Про мене</h1>
+    <ul>
+      <li>Ім’я: <span id="name"></span></li>
+      <li>Прізвище: <span id="lastname"></span></li>
+      <li>Рідне місто: <span id="hometown"></span></li>
+    </ul>
+    <script>
+      document.body.style.fontFamily = "Arial";
+      let x = document.getElementsByTagName("li");
+      x[0].innerText += " Ярослав";
+      x[1].innerText += " Петренко";
+      x[2].innerText += " Київ";
+      for (let el of x) {
+        el.classList.add("my-list-item");
+      }
+      let newStyle = document.createElement("style");
+      let content = document.createTextNode(".my-list-item { color: green; }");
+      newStyle.appendChild(content);
+      document.head.append(newStyle);
+    </script>
+  </body>
+</html>

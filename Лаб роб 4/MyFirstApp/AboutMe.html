@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" style="display: flex; flex-direction: column">
+      <span>{{printMessage()}}</span>
+      <span v-text="greetings()"></span>
+      <a v-bind:href="getDayInfo()">About this date</a>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const Create = {
+        data() {
+          return {
+            firstname: "Yaroslav",
+            lastname: "Petrenko",
+            birthday: "13.03.2001",
+          };
+        },
+        methods: {
+          printMessage() {
+            let options = {
+              day: "numeric",
+              month: "numeric",
+              year: "numeric",
+            };
+            let date = new Date();
+            let _birthday = this.birthday.split(".");
+            let birthday = new Date(
+              date.getFullYear(),
+              parseInt(_birthday[1] - 1, 10),
+              parseInt(_birthday[0], 10)
+            );
+            let diffTime = birthday - date;
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays < 0) {
+              birthday = new Date(
+                date.getFullYear() + 1,
+                parseInt(_birthday[1] - 1, 10),
+                parseInt(_birthday[0], 10)
+              );
+              diffTime = birthday - date;
+              diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            }
+            if (diffDays == 0) {
+              return "Happy Birthday" + this.firstname + " " + this.lastname;
+            } else {
+              return (
+                "Sorry, " +
+                this.firstname +
+                " " +
+                this.lastname +
+                " you need to wait " +
+                diffDays +
+                " days"
+              );
+            }
+          },
+          greetings() {
+            let date = new Date();
+            if (date.getHours() <= 11) {
+              return "Good Morning";
+            } else if (date.getHours() <= 18) {
+              return "Good Evening";
+            } else if (date.getHours() <= 24) {
+              return "Good Night";
+            }
+          },
+          getDayInfo() {
+            let date = this.birthday;
+            date = date.split(".");
+            let _date = new Date(
+              parseInt(date[2], 10),
+              parseInt(date[1] - 1, 10),
+              parseInt(date[0], 10)
+            );
+            let month = _date.toLocaleString("en-us", { month: "long" });
+            return "https://en.wikipedia.org/wiki/" + month + "_" + date[0];
+          },
+        },
+        created() {
+          //   this.printMessage();
+        },
+      };
+      Vue.createApp(Create).mount("#app");
+    </script>
+  </body>
+</html>

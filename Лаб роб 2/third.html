@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Найвищі вершини</title>
+  </head>
+  <body>
+    <h1>Найвищі вершини</h1>
+    <table style="border-style: solid; width: 100%; padding: 1vw" id="table">
+      <tr>
+        <th>Назва</th>
+        <th>Країна</th>
+        <th>Висота</th>
+      </tr>
+    </table>
+    <script>
+      function trAdd(name, country, height) {
+        let x = document.getElementById("table");
+        x.insertRow();
+        let th1 = document.createElement("th");
+        th1.textContent = name;
+        x.firstElementChild.lastElementChild.append(th1);
+        let th2 = document.createElement("th");
+        th2.textContent = country;
+        x.firstElementChild.lastElementChild.append(th2);
+        let th3 = document.createElement("th");
+        th3.textContent = height;
+        x.firstElementChild.lastElementChild.append(th3);
+      }
+      trAdd("Говерла", "Україна", "2000");
+      trAdd("Эверест", "Непал", "8848");
+    </script>
+  </body>
+</html>
